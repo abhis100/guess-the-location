@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoGuessr Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-background">
+            <div class="globe-animation"></div>
+        </div>
+        <div class="welcome-content">
+            <div class="welcome-header">
+                <h1 class="welcome-title">🌍 GeoGuessr Clone</h1>
+                <p class="welcome-subtitle">Test your geography knowledge around the world</p>
+            </div>
+
+            <div class="welcome-features">
+                <div class="feature-item">
+                    <div class="feature-icon">🗺️</div>
+                    <div class="feature-text">Explore Street View locations</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-text">Make your best guess</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏆</div>
+                    <div class="feature-text">Compete on leaderboards</div>
+                </div>
+            </div>
+
+            <div class="welcome-actions">
+                <button id="showLoginBtn" class="welcome-btn primary">Get Started</button>
+                <button id="showDemoBtn" class="welcome-btn secondary">Watch Demo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal hidden">
+        <div class="modal-content auth-modal">
+            <div class="auth-header">
+                <div class="auth-logo">🌍</div>
+                <h2 id="authTitle">Welcome Back</h2>
+                <p id="authSubtitle">Sign in to start your geography adventure</p>
+            </div>
+            <form id="authForm">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email address" required>
+                    <span class="input-icon">📧</span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <span class="input-icon">🔒</span>
+                </div>
+                <button type="submit" id="authSubmit" class="auth-submit">Sign In</button>
+            </form>
+            <div class="auth-divider">
+                <span>or</span>
+            </div>
+            <p id="authSwitch">Don't have an account? <span id="switchMode">Create one</span></p>
+        </div>
+    </div>
+
+    <!-- Main Game Interface -->
+    <div id="gameContainer" class="hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">GeoGuessr Clone</div>
+            <div class="user-info">
+                <span id="userEmail"></span>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </header>
+
+        <!-- Game Area -->
+        <div class="game-area">
+            <!-- Street View -->
+            <div id="streetView" class="street-view"></div>
+
+            <!-- Game UI Overlay -->
+            <div class="game-ui">
+                <!-- Round Info -->
+                <div class="round-info">
+                    <span>Round <span id="currentRound">1</span> of 5</span>
+                    <span>Score: <span id="currentScore">0</span></span>
+                </div>
+
+                <!-- Map Container -->
+                <div class="map-container" id="mapContainer">
+                    <div class="map-header">
+                        <span class="map-title">🗺️ Make Your Guess</span>
+                        <button class="expand-btn" id="expandMapBtn" title="Expand Map">⛶</button>
+                    </div>
+                    <div id="guessMap" class="guess-map"></div>
+                    <button id="guessBtn" class="guess-btn" disabled>Make Guess</button>
+                </div>
+
+                <!-- Results Panel -->
+                <div id="resultsPanel" class="results-panel hidden">
+                    <div class="result-info">
+                        <h3>Round Results</h3>
+                        <p>Distance: <span id="distance"></span> km</p>
+                        <p>Points: <span id="roundScore"></span></p>
+                    </div>
+                    <button id="nextRoundBtn" class="next-round-btn">Next Round</button>
+                </div>
+
+                <!-- Final Results -->
+                <div id="finalResults" class="final-results hidden">
+                    <h2>Game Complete!</h2>
+                    <p>Total Score: <span id="finalScore"></span></p>
+                    <div class="final-buttons">
+                        <button id="playAgainBtn">Play Again</button>
+                        <button id="viewHistoryBtn">View History</button>
+                        <button id="leaderboardBtn">Leaderboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="historyModal" class="modal hidden">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Game History</h2>
+                <span class="close" id="closeHistory">&times;</span>
+            </div>
+            <div id="historyContent" class="history-content"></div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboardModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Global Leaderboard</h2>
+                <span class="close" id="closeLeaderboard">&times;</span>
+            </div>
+            <div id="leaderboardContent" class="leaderboard-content"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqs3CLOIzNktW9HwoAO9uP5oPdf7S8XQM&libraries=geometry&callback=initMaps"></script>
+</body>
+
+</html>

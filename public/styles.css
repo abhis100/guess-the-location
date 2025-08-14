@@ -1,0 +1,789 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a1a1a;
+    color: white;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Welcome Screen */
+.welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.welcome-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.globe-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    margin: -150px 0 0 -150px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #4CAF50, #2E7D32);
+    opacity: 0.1;
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 600px;
+    padding: 2rem;
+}
+
+.welcome-header {
+    margin-bottom: 3rem;
+}
+
+.welcome-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #fff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.welcome-features {
+    display: flex;
+    justify-content: space-around;
+    margin: 3rem 0;
+    gap: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    text-align: center;
+}
+
+.welcome-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.welcome-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.welcome-btn.primary {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+.welcome-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+}
+
+.welcome-btn.secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.welcome-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: #2a2a2a;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-modal {
+    background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.auth-header {
+    margin-bottom: 2rem;
+}
+
+.auth-logo {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.auth-header h2 {
+    color: #4CAF50;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+#authSubtitle {
+    color: #ccc;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.modal-content.large {
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.close {
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close:hover {
+    color: white;
+}
+
+/* Auth Form */
+#authForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+.auth-submit {
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.auth-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.auth-divider {
+    margin: 1.5rem 0;
+    position: relative;
+    text-align: center;
+}
+
+.auth-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.auth-divider span {
+    background: #2a2a2a;
+    padding: 0 1rem;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+/* Error and Success Messages */
+.error-message, .success-message {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.error-message {
+    background: rgba(244, 67, 54, 0.1);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.success-message {
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.error-content, .success-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.error-icon, .success-icon {
+    font-size: 1.2rem;
+}
+
+.error-text {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+}
+
+.success-text {
+    color: #4CAF50;
+    font-size: 0.9rem;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading state for auth button */
+.auth-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#authSwitch {
+    margin-top: 1rem;
+    color: #ccc;
+}
+
+#switchMode {
+    color: #4CAF50;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#logoutBtn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background: #f44336;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#logoutBtn:hover {
+    background: #da190b;
+}
+
+/* Game Area */
+.game-area {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 60px;
+}
+
+.street-view {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+}
+
+/* Game UI Overlay */
+.game-ui {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.game-ui > * {
+    pointer-events: auto;
+}
+
+/* Round Info */
+.round-info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    gap: 2rem;
+    font-weight: bold;
+}
+
+/* Map Container */
+.map-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.map-container:hover {
+    transform: scale(1.05);
+    border-color: rgba(76, 175, 80, 0.5);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.map-container.expanded {
+    width: 500px;
+    height: 350px;
+    transform: scale(1);
+    border-color: #4CAF50;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 50;
+}
+
+.map-container.expanded:hover {
+    transform: scale(1);
+}
+
+.guess-map {
+    flex: 1;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.map-title {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.expand-btn {
+    background: none;
+    border: none;
+    color: #4CAF50;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 2px;
+    border-radius: 3px;
+    transition: background 0.2s;
+}
+
+.expand-btn:hover {
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.guess-btn {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background: #4CAF50;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.guess-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+}
+
+.guess-btn:not(:disabled):hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+/* Results Panel */
+.results-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    min-width: 300px;
+}
+
+.result-info h3 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.result-info p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.next-round-btn {
+    margin-top: 1.5rem;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 5px;
+    background: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.next-round-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+/* Final Results */
+.final-results {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    padding: 3rem;
+    border-radius: 15px;
+    text-align: center;
+    min-width: 400px;
+}
+
+.final-results h2 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.final-results p {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+.final-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.final-buttons button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#playAgainBtn {
+    background: #4CAF50;
+}
+
+#playAgainBtn:hover {
+    background: #45a049;
+}
+
+#viewHistoryBtn {
+    background: #2196F3;
+}
+
+#viewHistoryBtn:hover {
+    background: #1976D2;
+}
+
+#leaderboardBtn {
+    background: #FF9800;
+}
+
+#leaderboardBtn:hover {
+    background: #F57C00;
+}
+
+/* History Content */
+.history-content {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.game-history-item {
+    background: #3a3a3a;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.game-date {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.game-score {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.round-details {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.round-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: #4a4a4a;
+    border-radius: 4px;
+}
+
+/* Leaderboard Content */
+.leaderboard-content {
+    text-align: left;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: #3a3a3a;
+    border-radius: 8px;
+}
+
+.leaderboard-rank {
+    font-weight: bold;
+    color: #4CAF50;
+    width: 30px;
+}
+
+.leaderboard-email {
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.leaderboard-score {
+    font-weight: bold;
+    color: #FFD700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-title {
+        font-size: 2.5rem;
+    }
+    
+    .welcome-features {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .welcome-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .map-container {
+        width: 250px;
+        height: 150px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .map-container.expanded {
+        width: calc(100vw - 40px);
+        height: 300px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+    }
+    
+    .round-info {
+        top: 10px;
+        left: 10px;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .final-buttons {
+        flex-direction: column;
+    }
+    
+    .modal-content.large {
+        width: 95%;
+        padding: 1rem;
+    }
+    
+    .auth-modal {
+        width: 95%;
+        max-width: 350px;
+    }
+}
